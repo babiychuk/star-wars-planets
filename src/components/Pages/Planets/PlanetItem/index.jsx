@@ -25,7 +25,7 @@ const planetsStyles = makeStyles(() => ({
 const PlanetItem = ({ planet }) => {
   const classes = planetsStyles();
   return (
-    <Grid item xs={12} sm={4} md={3}>
+    <Grid item xs={12} sm={4} md={2}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.cardMedia}
@@ -34,9 +34,13 @@ const PlanetItem = ({ planet }) => {
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h6" component="h2">
-            Planet name: {planet?.name}
+            Planet name:{" "}
+            {planet?.name === "unknown" ? "no information" : planet?.name}
           </Typography>
-          <Typography>climate: {planet?.climate}</Typography>
+          <Typography>
+            climate:{" "}
+            {planet?.climate === "unknown" ? "no information" : planet?.climate}
+          </Typography>
           <Typography>
             population:{" "}
             {planet?.population === "unknown"
