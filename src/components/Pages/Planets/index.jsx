@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { getPlanets, getMorePlanets } from "../../../redux/planets/actions";
+import { clearSinglePlanet } from "../../../redux/singlePlanet/actions";
+import routes from "../../../routes";
 
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,6 +22,7 @@ const planetsStyles = makeStyles((theme) => ({
 const Planets = () => {
   const classes = planetsStyles();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const { data, loading, moreLoading, currentPage } = useSelector(
     (state) => state.planets
   );
@@ -27,6 +31,10 @@ const Planets = () => {
   useEffect(() => {
     if (!data) dispatch(getPlanets(firstpage));
   }, [dispatch, data]);
+
+  useEffect(() => {
+    if (routes.Root.path === pathname) dispatch(clearSinglePlanet());
+  }, [dispatch, pathname]);
 
   const loadMorePlanets = () => {
     dispatch(getMorePlanets(currentPage + 1));

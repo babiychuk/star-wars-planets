@@ -2,8 +2,6 @@ import types from "../types";
 import api from "../../services/api";
 
 export const getPlanets = (page) => async (dispatch) => {
-  dispatch({ type: types.CLEAR_SINGLE_PLANET });
-  dispatch({ type: types.CLEAR_RESIDENTS });
   dispatch({ type: types.GET_PLANETS_START });
   try {
     const { data, status } = await api.planets.getPlanets(page);

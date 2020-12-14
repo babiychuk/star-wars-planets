@@ -13,3 +13,9 @@ export const getSinglePlanet = (url) => async (dispatch) => {
     console.log(error?.response?.data?.error ?? "Something went wrong");
   }
 };
+
+export const clearSinglePlanet = () => (dispatch) => {
+  dispatch({ type: types.CLEAR_SINGLE_PLANET });
+  dispatch({ type: types.CLEAR_RESIDENTS });
+  
+};

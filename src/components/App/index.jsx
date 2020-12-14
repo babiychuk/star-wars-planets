@@ -1,12 +1,18 @@
 import React, { Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import routes from "../../routes";
+
 import Header from "../Base/Header";
+import Modal from "../Base/Modal";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 const App = () => {
+  const { isModal } = useSelector(state => state.modal);
   return (
     <>
+    {isModal && <Modal />}
       <Header />
       <CssBaseline />
       <main>

@@ -1,5 +1,9 @@
 import React from "react";
 import T from "prop-types";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../../../redux/modal/actions";
+
+import ResidentInfo from "./ResidentInfo";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -20,10 +24,16 @@ const residentStyles = makeStyles(() => ({
 
 const Resident = ({ resident }) => {
   const classes = residentStyles();
+  const dispatch = useDispatch();
 
+  const onClickHandler = () => {
+    dispatch(openModal(() => <ResidentInfo resident={resident} />));
+  };
   return (
     <>
-      <div className={classes.resident}>{resident?.name}</div>
+      <div className={classes.resident} onClick={onClickHandler}>
+        {resident?.name}
+      </div>
     </>
   );
 };
