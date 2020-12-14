@@ -97,7 +97,7 @@ const SinglePlanet = () => {
               <Typography variant="subtitle1" color="textSecondary">
                 population: {planet?.population ?? "no information"}
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
+              <Typography variant="subtitle1" color="textSecondary" >
                 residents:{" "}
                 {loadingResidents ? (
                   <Loader />
