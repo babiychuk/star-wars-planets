@@ -21,7 +21,11 @@ export const getMorePlanets = (page) => async (dispatch) => {
   try {
     const { data, status } = await api.planets.getPlanets(page);
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
-    dispatch({ type: types.GET_MORE_PLANETS_SUCCESS, payload: data });
+    dispatch({
+      type: types.GET_MORE_PLANETS_SUCCESS,
+      payload: data,
+      page: page,
+    });
   } catch (error) {
     dispatch({ type: types.GET_MORE_PLANETS_FAILURE });
     if (error?.response?.status === 401) return;

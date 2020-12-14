@@ -4,8 +4,9 @@ const planets = (
   state = {
     data: null,
     loading: true,
+    currentPage: 1,
   },
-  { type, payload }
+  { type, payload, page }
 ) => {
   switch (type) {
     case types.GET_PLANETS_START:
@@ -23,6 +24,7 @@ const planets = (
     case types.GET_MORE_PLANETS_SUCCESS:
       return {
         ...state,
+        currentPage: page,
         data: {
           ...payload,
           results: [

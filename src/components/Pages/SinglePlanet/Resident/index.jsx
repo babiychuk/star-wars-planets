@@ -7,8 +7,8 @@ const residentStyles = makeStyles(() => ({
   resident: {
     position: "relative",
     boxShadow: "1px 1px 2px #9ca0aa",
-    marginRight: "5px",
-    marginTop: "3px",
+    margin: "3px 5px 5px 0",
+    display: "inline-block",
     cursor: "pointer",
     padding: "10px",
     backgroundColor: ({ backgroundColor }) => backgroundColor,
@@ -23,7 +23,7 @@ const Resident = ({ resident }) => {
 
   return (
     <>
-      <span className={classes.resident}>{resident?.name}</span>
+      <div className={classes.resident}>{resident?.name}</div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlanets, getMorePlanets } from "../../../redux/planets/actions";
 
@@ -19,17 +19,17 @@ const planetsStyles = makeStyles((theme) => ({
 const Planets = () => {
   const classes = planetsStyles();
   const dispatch = useDispatch();
-  const [planetsPage, setPlanetsPage] = useState(1);
-  const { data, loading, moreLoading } = useSelector((state) => state.planets);
+  const { data, loading, moreLoading, currentPage } = useSelector(
+    (state) => state.planets
+  );
   const firstpage = 1;
 
   useEffect(() => {
-    dispatch(getPlanets(firstpage));
-  }, [dispatch]);
+    if (!data) dispatch(getPlanets(firstpage));
+  }, [dispatch, data]);
 
   const loadMorePlanets = () => {
-    dispatch(getMorePlanets(planetsPage + 1));
-    setPlanetsPage(planetsPage + 1);
+    dispatch(getMorePlanets(currentPage + 1));
   };
 
   return (
@@ -41,11 +41,12 @@ const Planets = () => {
           ))}
         </EmptyWrap>
       </Grid>
-      {!loading && data?.next &&
+      {!loading &&
+        data?.next &&
         (moreLoading ? (
           <Loader />
         ) : (
-          <ButtonLoadMore loadMore={loadMorePlanets} btnText={'Load more'} />
+          <ButtonLoadMore loadMore={loadMorePlanets} btnText={"Load more"} />
         ))}
     </div>
   );

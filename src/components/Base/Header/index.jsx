@@ -24,7 +24,7 @@ const headerStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = headerStyles();
   const { pathname } = useLocation();
-  const { data, loading } = useSelector((state) => state.planets);
+  const { data, loading, currentPage } = useSelector((state) => state.planets);
 
   return (
     <AppBar position="relative" className={classes.fixedHeader}>
@@ -40,7 +40,7 @@ const Header = () => {
         </Typography>
         {data?.results?.length && routes.Root.path === pathname && !loading && (
           <Typography variant="h6" color="inherit">
-            pages in catalog: {data?.results?.length / 10}
+            pages in catalog: {currentPage}
           </Typography>
         )}
       </Toolbar>
