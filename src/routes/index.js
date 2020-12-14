@@ -8,5 +8,11 @@ export default {
       import('../components/Pages/Planets' /* webpackChunkName: "Home" */),
     ),
   },
+  SinglePlanet: {
+    path: '/planet/', // :planetName
+    component: React.lazy(() =>
+      import('../components/Pages/SinglePlanet' /* webpackChunkName: "SinglePlanet" */),
+    ),
+  },
 };
 

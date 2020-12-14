@@ -26,18 +26,13 @@ const Header = () => {
     <AppBar position="relative" className={classes.fixedHeader}>
       <Toolbar>
         <PublicIcon className={classes.mrRight} />
-        <Typography
-          className={classes.mrRight}
-          variant="h6"
-          color="inherit"
-          noWrap
-        >
+        <Typography className={classes.mrRight} variant="h6" color="inherit" noWrap>
           Star Wars Planets
         </Typography>
         {data?.results?.length && (
           <Typography variant="h6" color="inherit">
-            pages in catalog: {data?.results?.length / 10}
-          </Typography>
+          pages in catalog: {data?.results?.length/10}
+        </Typography>
         )}
       </Toolbar>
     </AppBar>

@@ -1,5 +1,7 @@
 import React from "react";
 import T from "prop-types";
+import { Link } from "react-router-dom";
+import routes from "../../../../routes";
 
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -20,35 +22,43 @@ const planetsStyles = makeStyles(() => ({
   cardContent: {
     flexGrow: 1,
   },
+  link: { textDecoration: "none" },
 }));
 
 const PlanetItem = ({ planet }) => {
   const classes = planetsStyles();
   return (
     <Grid item xs={12} sm={4} md={2}>
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.cardMedia}
-          image="https://source.unsplash.com/random"
-          title="Planet title"
-        />
-        <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h6" component="h2">
-            Planet name:{" "}
-            {planet?.name === "unknown" ? "no information" : planet?.name}
-          </Typography>
-          <Typography>
-            climate:{" "}
-            {planet?.climate === "unknown" ? "no information" : planet?.climate}
-          </Typography>
-          <Typography>
-            population:{" "}
-            {planet?.population === "unknown"
-              ? "no residents"
-              : planet?.population}
-          </Typography>
-        </CardContent>
-      </Card>
+      <Link
+        className={classes.link}
+        to={`${routes.SinglePlanet.path}${planet?.name}`}
+      >
+        <Card className={classes.card}>
+          <CardMedia
+            className={classes.cardMedia}
+            image="https://source.unsplash.com/random"
+            title="Planet title"
+          />
+          <CardContent className={classes.cardContent}>
+            <Typography gutterBottom variant="h6" component="h2">
+              Planet name:{" "}
+              {planet?.name === "unknown" ? "no name" : planet?.name}
+            </Typography>
+            <Typography>
+              climate:{" "}
+              {planet?.climate === "unknown"
+                ? "no information"
+                : planet?.climate}
+            </Typography>
+            <Typography>
+              population:{" "}
+              {planet?.population === "unknown"
+                ? "no residents"
+                : planet?.population}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Link>
     </Grid>
   );
 };
