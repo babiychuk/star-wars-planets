@@ -24,7 +24,7 @@ const headerStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = headerStyles();
   const { pathname } = useLocation();
-  const { data } = useSelector((state) => state.planets);
+  const { data, loading } = useSelector((state) => state.planets);
 
   return (
     <AppBar position="relative" className={classes.fixedHeader}>
@@ -38,7 +38,7 @@ const Header = () => {
         >
           Star Wars Planets
         </Typography>
-        {data?.results?.length && routes.Root.path === pathname && (
+        {data?.results?.length && routes.Root.path === pathname && !loading && (
           <Typography variant="h6" color="inherit">
             pages in catalog: {data?.results?.length / 10}
           </Typography>

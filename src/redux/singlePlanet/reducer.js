@@ -2,7 +2,7 @@ import types from "../types";
 
 const singlePlanet = (
   state = {
-    data: null,
+    planet: null,
     loading: true,
   },
   { type, payload }
@@ -12,7 +12,7 @@ const singlePlanet = (
       return { ...state, loading: true };
 
     case types.GET_SINGLE_PLANET_SUCCESS:
-      return { ...state, data: payload, loading: false };
+      return { ...state, planet: payload, loading: false };
 
     case types.GET_SINGLE_PLANET_FAILURE:
       return { ...state, loading: false };

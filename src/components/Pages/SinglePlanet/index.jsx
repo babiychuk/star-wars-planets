@@ -11,7 +11,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
-import DeathStar from "../../../img/Death_Star.png";
+import Planet from "../../../img/planet.png";
+import Loader from "../../Base/Loader";
 
 const singlePlanetStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -28,7 +29,7 @@ const singlePlanetStyles = makeStyles((theme) => ({
     flex: "1 0 auto",
   },
   cover: {
-    width: 251,
+    width: 270,
   },
 }));
 
@@ -38,7 +39,7 @@ const SinglePlanet = () => {
   const params = useParams();
   const history = useHistory();
   const { data } = useSelector((state) => state.planets);
-  const planet = useSelector((state) => state.singlePlanet.data);
+  const { planet, loading } = useSelector((state) => state.singlePlanet);
 
   const planetUrl = useMemo(() => {
     return data?.results?.filter((planet) => planet.name === params.planetName);
@@ -55,41 +56,45 @@ const SinglePlanet = () => {
   return (
     <div className={classes.cardGrid}>
       <ButtonBack />
-      <Card className={classes.root}>
-        <CardMedia
-          className={classes.cover}
-          image={DeathStar}
-          title="Planet name"
-        />
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography component="h5" variant="h5">
-              Planet name: {planet?.name ?? 'no name'}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              rotation period: {planet?.rotation_period ?? 'no information'}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              diameter: {planet?.diameter ?? 'no information'}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              climate: {planet?.climate ?? 'no information'}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              gravity: {planet?.gravity ?? 'no information'}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              terrain: {planet?.terrain ?? 'no information'}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              population: {planet?.population ?? 'no information'}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              residents: {planet?.residents ?? 'no information'}
-            </Typography>
-          </CardContent>
-        </div>
-      </Card>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Card className={classes.root}>
+          <CardMedia
+            className={classes.cover}
+            image={Planet}
+            title={planet?.name ?? "no name"}
+          />
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <Typography component="h5" variant="h5">
+                Planet name: {planet?.name ?? "no name"}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                rotation period: {planet?.rotation_period ?? "no information"}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                diameter: {planet?.diameter ?? "no information"}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                climate: {planet?.climate ?? "no information"}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                gravity: {planet?.gravity ?? "no information"}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                terrain: {planet?.terrain ?? "no information"}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                population: {planet?.population ?? "no information"}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                residents: {planet?.residents ?? "no information"}
+              </Typography>
+            </CardContent>
+          </div>
+        </Card>
+      )}
     </div>
   );
 };

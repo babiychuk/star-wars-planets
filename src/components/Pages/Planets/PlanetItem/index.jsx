@@ -10,6 +10,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
+import Planet from "../../../../img/planet.png";
+
 const planetsStyles = makeStyles(() => ({
   card: {
     height: "100%",
@@ -17,7 +19,7 @@ const planetsStyles = makeStyles(() => ({
     flexDirection: "column",
   },
   cardMedia: {
-    paddingTop: "56.25%",
+    paddingTop: "100%",
   },
   cardContent: {
     flexGrow: 1,
@@ -36,7 +38,7 @@ const PlanetItem = ({ planet }) => {
         <Card className={classes.card}>
           <CardMedia
             className={classes.cardMedia}
-            image="https://source.unsplash.com/random"
+            image={Planet}
             title="Planet title"
           />
           <CardContent className={classes.cardContent}>
