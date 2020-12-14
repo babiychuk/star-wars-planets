@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import routes from "../../../routes";
 import { getSinglePlanet } from "../../../redux/singlePlanet/actions";
+import { getResident } from "../../../redux/resident/actions";
 import ButtonBack from "../../Base/ButtonBack";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 
 import Planet from "../../../img/planet.png";
 import Loader from "../../Base/Loader";
+import Resident from "./Resident";
 
 const singlePlanetStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -40,6 +42,9 @@ const SinglePlanet = () => {
   const history = useHistory();
   const { data } = useSelector((state) => state.planets);
   const { planet, loading } = useSelector((state) => state.singlePlanet);
+  const { residents, loadingResidents } = useSelector(
+    (state) => state.residents
+  );
 
   const planetUrl = useMemo(() => {
     return data?.results?.filter((planet) => planet.name === params.planetName);
@@ -53,6 +58,10 @@ const SinglePlanet = () => {
     dispatch(getSinglePlanet(planetUrl[0]?.url));
   }, [dispatch, planetUrl, history]);
 
+  useEffect(() => {
+    if (planet?.residents) dispatch(getResident(planet?.residents));
+  }, [dispatch, planet]);
+  
   return (
     <div className={classes.cardGrid}>
       <ButtonBack />
@@ -89,7 +98,16 @@ const SinglePlanet = () => {
                 population: {planet?.population ?? "no information"}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                residents: {planet?.residents ?? "no information"}
+                residents:{" "}
+                {loadingResidents ? (
+                  <Loader />
+                ) : !!residents?.length ? (
+                  residents?.map((item) => (
+                    <Resident key={item.url} resident={item} />
+                  ))
+                ) : (
+                  "no residens"
+                )}
               </Typography>
             </CardContent>
           </div>
