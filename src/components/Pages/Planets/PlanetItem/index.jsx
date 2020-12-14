@@ -41,20 +41,13 @@ const PlanetItem = ({ planet }) => {
           />
           <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h6" component="h2">
-              Planet name:{" "}
-              {planet?.name === "unknown" ? "no name" : planet?.name}
+              Planet name: {planet?.name ?? "no name"}
             </Typography>
             <Typography>
-              climate:{" "}
-              {planet?.climate === "unknown"
-                ? "no information"
-                : planet?.climate}
+              climate: {planet?.climate ?? "no information"}
             </Typography>
             <Typography>
-              population:{" "}
-              {planet?.population === "unknown"
-                ? "no residents"
-                : planet?.population}
+              population: {planet?.population ?? "no residents"}
             </Typography>
           </CardContent>
         </Card>

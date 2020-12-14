@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import routes from "../../../routes";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,18 +23,25 @@ const headerStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = headerStyles();
+  const { pathname } = useLocation();
   const { data } = useSelector((state) => state.planets);
+
   return (
     <AppBar position="relative" className={classes.fixedHeader}>
       <Toolbar>
         <PublicIcon className={classes.mrRight} />
-        <Typography className={classes.mrRight} variant="h6" color="inherit" noWrap>
+        <Typography
+          className={classes.mrRight}
+          variant="h6"
+          color="inherit"
+          noWrap
+        >
           Star Wars Planets
         </Typography>
-        {data?.results?.length && (
+        {data?.results?.length && routes.Root.path === pathname && (
           <Typography variant="h6" color="inherit">
-          pages in catalog: {data?.results?.length/10}
-        </Typography>
+            pages in catalog: {data?.results?.length / 10}
+          </Typography>
         )}
       </Toolbar>
     </AppBar>

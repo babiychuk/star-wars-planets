@@ -34,7 +34,7 @@ const Planets = () => {
 
   return (
     <div className={classes.cardGrid}>
-      <Grid container spacing={2} alignItems="center" justify="center">
+      <Grid container spacing={2}>
         <EmptyWrap loading={loading} empty={!data?.results?.length}>
           {data?.results?.map((item) => (
             <PlanetItem key={item?.url} planet={item} />
